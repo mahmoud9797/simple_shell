@@ -26,4 +26,5 @@ char **split_cmd(char *s);
 void path_append(char *full_path, char *dir, char *command);
 char *get_path(char *command);
 int execute_command(char *command, char *args[]);
+int _strncmp(char *s1, char *s2, int n);
 #endif

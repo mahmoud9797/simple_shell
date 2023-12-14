@@ -14,7 +14,7 @@ char *_getenv(char *var_name)
 	while (environ[i] != NULL)
 	{
 		envo = _strchr(environ[i], marker);
-		if (envo != NULL && strncmp(environ[i], var_name, len) == 0)
+		if (envo != NULL && _strncmp(environ[i], var_name, len) == 0)
 		{
 			envo = envo + 1;
 			return (envo);
