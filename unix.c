@@ -1,43 +1,32 @@
 #include "unix.h"
-int main(int argc, char *argv[])
+int main(void)
 {
-    char *input;
-    char **args;
-    int status;
+  char *command, **arguments;
+  char *path;
 
-    if (argc > 1) {
-        args = &argv[1];
-        status = execute_command(args[0], args);
-        if (status == -1) {
-            perror("Error executing command");
-            return 1;
-        }
-        return 0;
-    }
+  while (1)
+  {
+      dis_prompt();
+      command = takeinput();
+      arguments = split_cmd(command);
 
-    while (1) {
-        dis_prompt();
-        input = takeinput();
-        args = split_cmd(input);
+      if (arguments[0] != NULL)
+      {
+          path = get_path(arguments[0]);
+          if (path != NULL)
+          {
+              execute_command(path, arguments);
+              free(path);
+          }
+          else
+          {
+              printf("Command not found\n");
+          }
+      }
 
-        if (args[0] != NULL) {
-            status = execute_command(args[0], args);
-            if (status == -1) {
-                perror("Error executing command");
-            }
-        }
+      free(arguments);
+      free(command);
+  }
 
-        free(input);
-
-        if (args != NULL) {
-            int i = 0;
-            while (args[i] != NULL) {
-                free(args[i]);
-                i++;
-            }
-            free(args);
-        }
-    }
-
-    return 0;
+  return 0;
 }
