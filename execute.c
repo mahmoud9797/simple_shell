@@ -13,7 +13,7 @@ int execute_command(char *path, char **args)
   }
   else if (pid == 0)
   {
-      if (execve(path, args, NULL) == -1)
+      if (execve(path, args, environ) == -1)
       {
           perror("Execve failed");
           return -1;
