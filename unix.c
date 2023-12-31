@@ -23,7 +23,7 @@ int main(void)
               printf("Command not found\n");
           }
       }
-
+	
       free(arguments);
       free(command);
   }

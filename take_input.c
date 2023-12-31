@@ -27,7 +27,6 @@ char *takeinput()
 		else
 		{
 			perror("error during reading");
-			free(line);
 			exit(EXIT_FAILURE);
 		}
 	}
